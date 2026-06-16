@@ -49,11 +49,16 @@
 }
 
 html {
+  width: 100%;
+  margin: 0;
+  padding: 0;
   background: transparent;
 }
 
 body {
+  width: 100%;
   margin: 0;
+  padding: 0;
   background: transparent;
   color: var(--foreground);
   font-family:
@@ -68,6 +73,9 @@ body {
 #root {
   display: inline-block;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
 }
 
 button,
