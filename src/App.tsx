@@ -280,7 +280,7 @@ function MainIpCard({
 
   return (
     <section className="dashboard-card overflow-hidden p-0">
-      <div className="relative min-h-[184px] overflow-hidden border-border p-3 sm:p-4">
+      <div className="relative min-h-[204px] overflow-hidden border-border p-3 sm:p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
