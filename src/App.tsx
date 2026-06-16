@@ -360,11 +360,5 @@ export default function App() {
     void refresh();
   }, [refresh]);
 
-  return (
-    <main className="min-h-screen px-4 py-6 sm:py-10">
-      <div className="mx-auto w-full max-w-3xl">
-        <MainIpCard error={error} info={info} loading={loading} onRefresh={refresh} refreshing={loading} />
-      </div>
-    </main>
-  );
+  return <MainIpCard error={error} info={info} loading={loading} onRefresh={refresh} refreshing={loading} />;
 }

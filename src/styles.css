@@ -49,16 +49,12 @@
 }
 
 html {
-  min-height: 100%;
-  background: var(--background);
+  background: transparent;
 }
 
 body {
-  min-height: 100%;
   margin: 0;
-  background:
-    linear-gradient(180deg, rgba(31, 84, 215, 0.08), transparent 340px),
-    var(--background);
+  background: transparent;
   color: var(--foreground);
   font-family:
     ui-sans-serif,
@@ -67,6 +63,11 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+}
+
+#root {
+  display: inline-block;
+  width: 100%;
 }
 
 button,
@@ -94,7 +95,7 @@ select {
 }
 
 .dark body {
-  background: var(--background);
+  background: transparent;
 }
 
 .dark .dashboard-card {
