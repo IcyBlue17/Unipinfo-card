@@ -34,6 +34,7 @@ type CloudflareIpApi = {
 const EMPTY_TEXT = "未获取";
 const IP_API_URL = "https://cf-ip.uip.moe/ipapi";
 const TRACE_URL = "https://cf-ip.uip.moe/cdn-cgi/trace";
+const FLAG_BASE = "https://flagcdn.com";
 
 const COUNTRY_CODE_NAMES: Record<string, string> = {
   CN: "中国",
@@ -198,7 +199,9 @@ async function loadIpInfo() {
 
 function FlagIcon({ code, label, className = "" }: { code?: string; label?: string; className?: string }) {
   const flagCode = /^[a-z]{2}$/i.test(code ?? "") ? code!.toLowerCase() : undefined;
-  if (!flagCode) {
+  const [failed, setFailed] = useState(false);
+
+  if (!flagCode || failed) {
     return (
       <span
         aria-label={label ?? "Global"}
@@ -212,7 +215,12 @@ function FlagIcon({ code, label, className = "" }: { code?: string; label?: stri
 
   return (
     <span className={`inline-flex shrink-0 overflow-hidden rounded-full border border-border bg-muted ${className}`}>
-      <img alt={label ?? flagCode.toUpperCase()} className="size-full object-cover" src={`/flags/${flagCode}.svg`} />
+      <img
+        alt={label ?? flagCode.toUpperCase()}
+        className="size-full object-cover"
+        onError={() => setFailed(true)}
+        src={`${FLAG_BASE}/${flagCode}.svg`}
+      />
     </span>
   );
 }
@@ -338,7 +346,11 @@ export default function App() {
   const [error, setError] = useState<string | undefined>();
 
   useEffect(() => {
-    document.documentElement.classList.add("dark");
+    const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    const apply = () => document.documentElement.classList.toggle("dark", mql.matches);
+    apply();
+    mql.addEventListener("change", apply);
+    return () => mql.removeEventListener("change", apply);
   }, []);
 
   const refresh = useCallback(async () => {
